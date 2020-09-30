@@ -30,22 +30,32 @@ public class BootStrapData implements CommandLineRunner {
 
         Set<Author> patelAuthor = new HashSet<>() ;
         Set<Book> books = new HashSet<>() ;
-        Author patel = new Author("bipin", "patel",books);
-        patelAuthor.add(patel);
+
+        Publisher leamington  = new Publisher("world books","9 highfield", "richmond","texas","77404");
+        publisherRepository.save(leamington);
+        Publisher destination  = new Publisher("inspired books","anywhere", "hell","florida","12345");
+        publisherRepository.save(destination);
+
         Book   airlines = new Book("airlines", "123", patelAuthor);
+        airlines.setPublisher(leamington);
         Book   missionImpossible = new Book("missionImpossible", "456", patelAuthor);
+        airlines.setPublisher(leamington);
         Book   inception = new Book("inception", "789", patelAuthor);
+        airlines.setPublisher(destination);
         books.add(airlines);
         books.add(missionImpossible);
         books.add(inception);
+
+        Author patel = new Author("bipin", "patel",books);
+        patel.getBooks().add(airlines);
+        patel.getBooks().add(missionImpossible);
+        patel.getBooks().add(inception);
+        patelAuthor.add(patel);
 
         authorRepository.save(patel);
         bookRepository.save(airlines);
         bookRepository.save(missionImpossible);
         bookRepository.save(inception);
-
-        Publisher leamington  = new Publisher("world books","9 highfield", "richmond","texas","77404");
-        publisherRepository.save(leamington);
 
         System.out.println("started in boostrap");
         System.out.println("number of books added " + bookRepository.count());
