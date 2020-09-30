@@ -28,6 +28,8 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        System.out.println("started in boostrap");
+
         Set<Author> patelAuthor = new HashSet<>() ;
         Set<Book> books = new HashSet<>() ;
 
@@ -39,9 +41,9 @@ public class BootStrapData implements CommandLineRunner {
         Book   airlines = new Book("airlines", "123", patelAuthor);
         airlines.setPublisher(leamington);
         Book   missionImpossible = new Book("missionImpossible", "456", patelAuthor);
-        airlines.setPublisher(leamington);
+        missionImpossible.setPublisher(leamington);
         Book   inception = new Book("inception", "789", patelAuthor);
-        airlines.setPublisher(destination);
+        inception.setPublisher(destination);
         books.add(airlines);
         books.add(missionImpossible);
         books.add(inception);
@@ -57,9 +59,9 @@ public class BootStrapData implements CommandLineRunner {
         bookRepository.save(missionImpossible);
         bookRepository.save(inception);
 
-        System.out.println("started in boostrap");
         System.out.println("number of books added " + bookRepository.count());
         System.out.println("number of authors added " + authorRepository.count());
         System.out.println("number of publishers added " + publisherRepository.count());
+
     }
 }
